@@ -85,7 +85,8 @@ export class PostService {
 
   async getPosts(page: number) {
     const perPage = 10;
-    const offset = (page - 1) * perPage;
+    const pageNumber = Number(page) || 1;
+    const offset = (pageNumber - 1) * perPage;
     const queryBuilder = await this.getPostsBaseQuery();
     const posts = await queryBuilder.take(perPage).skip(offset).getMany();
 
@@ -184,7 +185,7 @@ export class PostService {
         }));
       };
 
-      const { user, images, likes, votes, ...postWithoutUser } = foundPost;
+      const { images, likes, votes, ...postWithoutUser } = foundPost;
       const newLikes = likes.map((like) => ({ userId: like.user.id }));
       const newVotes = votes.map((vote) => {
         return {
