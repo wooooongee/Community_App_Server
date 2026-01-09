@@ -280,7 +280,7 @@ export class PostService {
     if (post.userId !== user.id) {
       throw new UnauthorizedException('수정 권한이 없습니다.');
     }
-    const { title, description, imageUris } = updatePostDto;
+    const { title, description, imageUris, deleteVote } = updatePostDto;
     if (title) {
       post.title = title;
     }
@@ -292,6 +292,11 @@ export class PostService {
 
     try {
       await this.imageRepository.save(images);
+
+      if (deleteVote) {
+        await this.voteRepository.delete({ post: { id } });
+      }
+
       await this.postRepository.save(post);
       return post.id;
     } catch (error) {

@@ -22,4 +22,6 @@ export class CreatePostDto {
   @IsOptional()
   @IsArray()
   voteOptions?: CreateVoteOptionDto[];
+
+  deleteVote?: boolean;
 }
