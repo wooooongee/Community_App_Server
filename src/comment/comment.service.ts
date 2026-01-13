@@ -1,6 +1,5 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -71,6 +70,7 @@ export class CommentService {
         id: comment.user.id,
         nickname: comment.user.nickname,
         imageUri: comment.user.imageUri,
+        avatarConfig: comment.user.avatarConfig,
       },
       replies: comment.replies.map((reply) => ({
         id: reply.id,
@@ -80,6 +80,7 @@ export class CommentService {
           id: reply.user.id,
           nickname: reply.user.nickname,
           imageUri: reply.user.imageUri,
+          avatarConfig: reply.user.avatarConfig,
         },
       })),
     }));

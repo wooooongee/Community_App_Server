@@ -45,6 +45,7 @@ export class LikeService {
         id: user?.id ?? null,
         nickname: user?.nickname ?? null,
         imageUri: user?.imageUri ?? null,
+        avatarConfig: user?.avatarConfig ?? null,
       };
       const newLikes = likes.map((like) => ({ userId: like.user.id }));
       const totalVotes = votes.reduce((sum, vote) => {

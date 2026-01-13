@@ -36,11 +36,15 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const userCount = (await this.userRepository.count()) + 1;
+    const defaultAvatarConfig = {
+      seed: `user_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+    };
     const user = this.userRepository.create({
       email,
       password: hashedPassword,
       loginType: 'email',
       nickname: '익명' + userCount,
+      avatarConfig: defaultAvatarConfig,
     });
 
     try {
@@ -187,6 +191,7 @@ export class AuthService {
       bottomId,
       faceId,
       background,
+      avatarConfig,
     } = editProfileDto;
 
     if (nickname) {
@@ -244,6 +249,9 @@ export class AuthService {
     }
     if (background) {
       profile.background = background;
+    }
+    if (avatarConfig) {
+      profile.avatarConfig = avatarConfig;
     }
 
     try {

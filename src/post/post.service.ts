@@ -60,6 +60,7 @@ export class PostService {
         id: user?.id ?? null,
         nickname: user?.nickname ?? null,
         imageUri: user?.imageUri ?? null,
+        avatarConfig: user?.avatarConfig ?? null,
       };
 
       const newLikes = likes.map((like) => ({ userId: like.user.id }));
@@ -169,6 +170,7 @@ export class PostService {
             id: comment.user?.id ?? null,
             nickname: comment.user?.nickname ?? null,
             imageUri: comment.user?.imageUri ?? null,
+            avatarConfig: comment.user?.avatarConfig ?? null,
           },
           isDeleted: comment.isDeleted,
           replies: comment.replies.map((reply) => ({
@@ -179,6 +181,7 @@ export class PostService {
               id: reply.user?.id ?? null,
               nickname: reply.user?.nickname ?? null,
               imageUri: reply.user?.imageUri ?? null,
+              avatarConfig: reply.user?.avatarConfig ?? null,
             },
             isDeleted: reply.isDeleted,
           })),
@@ -216,6 +219,7 @@ export class PostService {
           id: foundPost.user?.id ?? null,
           nickname: foundPost.user?.nickname ?? null,
           imageUri: foundPost.user?.imageUri ?? null,
+          avatarConfig: foundPost.user?.avatarConfig ?? null,
         },
         commentCount: getCommentCount(foundPost.comments),
         comments: processComments(foundPost.comments).sort(

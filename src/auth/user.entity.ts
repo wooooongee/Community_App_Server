@@ -14,6 +14,26 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export interface LoreleiAvatarConfig {
+  seed: string;
+  flip?: boolean;
+  backgroundColor?: string[];
+  hair?: string[];
+  eyes?: string[];
+  eyebrows?: string[];
+  mouth?: string[];
+  nose?: string[];
+  glasses?: string[];
+  glassesProbability?: number;
+  earrings?: string[];
+  earringsProbability?: number;
+  head?: string[];
+  beard?: string[];
+  beardProbability?: number;
+  freckles?: string[];
+  frecklesProbability?: number;
+}
+
 @Entity()
 @Unique(['email'])
 export class User extends BaseEntity {
@@ -61,6 +81,9 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   background: string;
+
+  @Column({ type: 'json', nullable: true })
+  avatarConfig: LoreleiAvatarConfig;
 
   @CreateDateColumn()
   createdAt: Date;
